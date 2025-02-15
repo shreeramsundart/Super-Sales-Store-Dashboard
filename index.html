@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Store Sales Dashboard</title>
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            text-align: center; 
+            background-color: #0B1727; 
+            margin: 0; 
+            padding: 0;
+            color: white;
+        }
+        header {
+            background-color: #0B1727; 
+            padding: 20px;
+            color: white;
+            font-size: 38px;
+            font-weight: bolder;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .container {
+            margin: 30px auto;
+            max-width: 90%;
+        }
+        .btn-container {
+            margin-bottom: 20px;
+        }
+        .btn {
+            background: white;
+            color: #0B1727;
+            padding: 12px 18px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            margin: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.2);
+        }
+        .btn:hover, .btn.active {
+            background: #005BB5;
+            color: white;
+        }
+        .image-container {
+            max-width: 900px;
+            margin: auto;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .dashboard-img {
+            width: 100%;
+            border-radius: 10px;
+            display: none;
+        }
+        .active-img {
+            display: block;
+        }
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 14px;
+            color: #ddd;
+        }
+
+        /* Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .popup-box {
+            background: rgba(30, 42, 56, 0.9);
+            padding: 20px;
+            width: 400px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-20px);
+            animation: slideUp 0.5s ease-in-out forwards;
+        }
+        .popup-box h2 {
+            margin: 0 0 10px;
+            font-size: 22px;
+            color: #ffffff;
+        }
+        .popup-box p {
+            font-size: 16px;
+            color: #dcdcdc;
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+        .popup-btn {
+            margin-top: 15px;
+            padding: 12px 20px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+        .popup-btn:hover {
+            background: #0056b3;
+            box-shadow: 0 6px 12px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Pop-up -->
+    <div class="popup-overlay" id="popup">
+        <div class="popup-box">
+            <h2>📢 Important Notice</h2>
+            <p>This is a static preview of the Power BI dashboard. Certain interactive features, such as filtering and real-time updates, may not be available.</p>
+            <button class="popup-btn" onclick="closePopup()">Got it</button>
+        </div>
+    </div>
+
+    <header>Super Store Sales Dashboard</header>
+
+    <div class="container">
+        <div class="btn-container">
+            <button class="btn active" onclick="showImage('dashboard', this)">Main Dashboard</button>
+            <button class="btn" onclick="showImage('central', this)">Central</button>
+            <button class="btn" onclick="showImage('east', this)">East</button>
+            <button class="btn" onclick="showImage('south', this)">South</button>
+            <button class="btn" onclick="showImage('west', this)">West</button>
+        </div>
+
+        <div class="image-container">
+            <img id="dashboard" class="dashboard-img active-img" src="Images/Main Dashboard.png" alt="Super Store Dashboard">
+            <img id="central" class="dashboard-img" src="Images/Central.png" alt="Super Store - Central Region">
+            <img id="east" class="dashboard-img" src="Images/East.png" alt="Super Store - East Region">
+            <img id="south" class="dashboard-img" src="Images/South.png" alt="Super Store - South Region">
+            <img id="west" class="dashboard-img" src="Images/West.png" alt="Super Store - West Region">
+        </div>
+    </div>
+
+    <footer>&copy; 2025 Shree Ram Sundar. All rights reserved.</footer>
+
+    <script>
+        function showImage(id, btn) {
+            let images = document.getElementsByClassName("dashboard-img");
+            for (let img of images) {
+                img.classList.remove("active-img");
+            }
+            document.getElementById(id).classList.add("active-img");
+
+            let buttons = document.getElementsByClassName("btn");
+            for (let button of buttons) {
+                button.classList.remove("active");
+            }
+            btn.classList.add("active");
+        }
+
+        function closePopup() {
+            let popup = document.getElementById("popup");
+            popup.style.opacity = "0";
+            setTimeout(() => { popup.style.display = "none"; }, 300);
+        }
+    </script>
+</body>
+</html>
